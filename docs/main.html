@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Documentations</title>
+    <script src="docs.js"></script>
+    <link rel="stylesheet" href="../main.css" />
+    <style>
+        main {
+            text-align: center;
+            width: 100%;
+            margin-top: 8%;
+            margin-bottom: 4%;
+        }
+        .links-container {
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 32px;
+        }
+        .links-container a {
+            display: block;
+            width: 50%;
+            padding: 16px;
+            margin: 25px auto;
+            background-color: slateblue;
+            color: white;
+            text-decoration: none;
+            transition: background 220ms;
+        }
+        .links-container a:active {
+            background-color: lightskyblue;
+        }
+        .links-container a:hover {
+            background-color: cornflowerblue;
+        }
+        main > p > i {
+            color: darkslategray;
+        }
+    </style>
+</head>
+<body>
+    <ul id="navbar"></ul>
+    <main>
+        <h1>Welcome to the Official Documentations of GASM</h1>
+        <p><i>One Page to bring them all, and in the browser bind them...</i></p>
+        <div class="links-container">
+            <a href="../learn.html">Learn GASM!</a>
+            <a href="../playground.html">Not Sure? Try It Out!</a>
+            <a href="reference.html">GASM Reference</a>
+        </div>
+    </main>
+    <footer id="footer"></footer>
+    <script src="../template.js" defer></script>
+</body>
+</html>

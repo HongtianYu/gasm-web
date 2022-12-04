@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Site</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="code.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
+    <style>
+        .main {
+            padding: 25px; 
+            text-align: center; /* centering the text */
+            background: linear-gradient(lightcyan, white 65%); /* the good ol' gradient */
+            font-family: 'Roboto', sans-serif;
+        }
+        .main h1 {
+            display: inline-block; /* auto width while being a block element */
+            margin: auto;
+			padding: 5px;
+            text-align: center;
+			/* underline styles */
+			border-bottom: 4px solid #7ca7eb;
+			transition-duration: 0.25s;
+            font-weight: normal;
+        }
+		
+		.main h1:hover {
+            padding: 5px 50px;
+            background-color: rgb(190, 224, 222);
+			border-bottom-color: blue;
+            font-weight: bold;
+            /* the background's shape for the heading */
+            /* using rounded borders */
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+		}
+		
+        .main ul {
+            /* the requirements list */
+            text-align: left;
+            margin-left: 10%;
+            list-style-type: square;
+        }
+        .main code {
+             background-color: lightcyan;
+             border: none;
+             border-radius: 2px;
+             padding: 0px 4px;
+             font-size: 1em;
+        }
+        .main code > span {
+            /* the keyword's style */
+            color: blue;
+        }
+        .main a {
+            text-decoration: none;
+            border: none;
+        }
+        .main a:hover {
+            text-decoration: underline;
+        }
+        .logo-container {
+            /* the table */
+            vertical-align: middle;
+            width: 100%;
+        }
+        .logo-container img {
+            /* the logos */
+            width: auto;
+            height: 4.5em;
+            display: inline-block;
+            vertical-align: middle; /* to align with the text */
+            padding: 16px;
+			transition-duration: 200ms;
+			border-color: transparent;
+        }
+		.logo-container img:hover {
+			height: 5em;
+			border: 5px solid;
+			border-color: lightgray;
+		}
+        .logo-container td > span {
+            /* the usage descriptions... */
+            display: block;
+            width: 100%;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <ul id="navbar"></ul>
+    <div class="main">
+        <br />
+        <h1> - About The Website - </h1>
+        <br />
+        <br />
+        <p>
+            All code in this site (HTML, CSS, JS) is written by hand.
+            In order to give you a better experience at this site,
+            please use a browser that supports the following features:
+        </p>
+        <ul>
+            <!-- the minimum requirements for this webpage to work properly -->
+            <li>
+                JavaScript/ECMAScript 2015 [ES2015 (ES6)] <br />
+                &nbsp;&nbsp;&nbsp;- <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">
+                    Template Literals</a> and keywords such as <code><span>let</span></code> and <code><span>const</span></code> are used in this site.
+            </li>
+            <li>
+                CSS3+ (<a href="https://developer.mozilla.org/en-US/docs/Web/CSS">Latest Specifications Here</a>)
+            </li>
+        </ul>
+        <br />
+        <!-- the logos table -->
+        <table class="logo-container">
+            <tbody>
+                <tr>
+                    <td>
+                        <!-- The new property "srcset" is used as some browsers may not support SVG embedding for some reason -->
+                        <a href="https://blender.org"><img title="Background Powered By Blender" srcset="res/blender_logo_socket.svg" alt="Blender Logo" /></a>
+                    </td>
+                    <td>
+                        <span>Is Used to Make the Home Page's Background</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="https://www.getpaint.net/"><img title="Paint.NET" src="https://www.getpaint.net/images/Logo4.png" /></a>
+                    </td>
+                    <td>
+                        <span>Is Used to Make GASM's Logo</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="https://code.visualstudio.com"><img title="Visual Studio Code" src="https://media.githubusercontent.com/media/microsoft/vscode-docs/master/images/logo-stable.png" /></a>
+                    </td>
+                    <td>
+                        <span>Is Used to Write All the Code</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+    </div>
+    <footer id="footer"></footer>
+    <script src="template.js" defer></script>
+</body>
+</html>

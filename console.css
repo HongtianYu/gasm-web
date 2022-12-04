@@ -1,0 +1,138 @@
+/* Console page stytles and layouts */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.gasm-integer {
+    color: lawngreen;
+}
+
+.gasm-decimal {
+    color: orangered;
+}
+
+.gasm-instruction {
+    color: skyblue; /* lighter */
+}
+
+.gasm-variable {
+    color: lightcyan;
+}
+
+.gasm-register {
+    color: darkgray;
+}
+
+#navbar, #footer {
+    flex: none;
+}
+
+main {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    min-height: 0px; /* keeps its size */
+}
+
+.console-wrapper, #canvas-out {
+    width: 50%;
+    height: 100%;
+}
+
+.console-wrapper {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+#console {
+    flex-grow: 1;
+    box-sizing: border-box;
+    background-color: black;
+    color: yellowgreen;
+    padding: 1em;
+    overflow-y: auto;
+}
+
+#canvas-out {
+    flex-grow: 1;
+}
+
+#stdout, #stdout > div {
+    white-space: pre-wrap;
+}
+
+.input-line {
+    display: flex; 
+}
+
+.input-line.active {
+    background-color: rgba(32, 32, 32, 0.5);
+}
+
+.stdin-container {
+    position: relative; 
+    display: inline-block; 
+    flex: 1; /* fills the rest of the space */
+    box-sizing: border-box;
+}
+
+#stdin-highlighted {
+    position: static;
+}
+
+#stdin {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* The overlay and the $stdin line */
+#stdin, #stdin-highlighted {
+    box-sizing: inherit;
+    width: 100%;
+
+    border: none;
+    border-radius: 0px;
+
+    resize: none;
+    padding: 0px;
+
+    font-family: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: inherit;
+}
+
+#stdin {
+    background: none;
+    color: transparent;
+    caret-color: yellowgreen;
+}
+
+#stdin:focus {
+    border: 0px none;
+    box-shadow: none;
+    outline: none;
+}
+
+/* evaluation result */
+span.er {
+    background-color: rgba(255, 128, 0, 0.25);
+}
+
+span.er > .highlight {
+    background-color: rgba(255, 255, 0, 0.5);
+}
+
+

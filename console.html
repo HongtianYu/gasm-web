@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Console</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="code.css" />
+    <link rel="stylesheet" href="console.css" />
+</head>
+
+<body>
+    <ul id="navbar"></ul>
+    <main>
+        <div class="console-wrapper">
+            <div id="console" class="code">
+            <!-- This part should not be indented as it's pre-wrapped... -->
+<div id="stdout">Welcome to the GASM Interactive Shell. 
+Hongtian Yu 2020.
+
+</div>
+                <div class="input-line">
+                    <span>>>>&nbsp;</span>
+                    <div class="stdin-container">
+                        <div id="stdin-highlighted"></div>
+                        <input type="text" id="stdin" autofocus="true" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <canvas id="canvas-out"></canvas>
+    </main>
+    <footer id="footer"></footer>
+    <script src="template.js" defer></script>
+    <script src="gasm-lib/gasm-lexer.js" defer></script>
+    <script src="gasm-lib/gasm-engine.js" defer></script>
+    <script src="gasm-lib/gasm-highlight.js" defer></script>
+    <script src="console.js" defer></script>
+</body>
+
+</html>

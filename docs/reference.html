@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>GASM Reference</title>
+    <script src="docs.js"></script>
+    <link rel="stylesheet" href="../main.css" />
+    <link rel="stylesheet" href="../code.css" />
+    <link rel="stylesheet" href="docs.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="reference.css" />
+</head>
+
+<body>
+    <ul id="navbar"></ul>
+    <div class="main">
+        <div class="nav-side-wrapper">
+            <aside class="nav-side" id="nav-side">
+                <a href="#intro">Introduction</a>
+                <div class="l2">
+                    <a href="#intro-why">Why GASM?</a>
+                    <a href="#tags">Tags/Labels Used</a>
+                </div>
+                <a href="#data-and-types">Data &amp; Types</a>
+                <div class="l2">
+                    <a href="#registers">Registers</a>
+                </div>
+                <a href="#syntax">Syntax</a>
+                <a href="#instructions">Instructions</a>
+                <div class="l2" id="instructions-list"></div>
+                <div class="l2">
+                    <a href="#operations">Common Operations</a>
+                    <a href="#conditionals">Common Conditionals</a>
+                </div>
+                <a href="#draft">Notes on Draft Features</a>
+            </aside>
+        </div>
+        <main>
+            <h1>GASM Reference</h1>
+            <!-- Just testing out my shortcodes...
+            <p class="text">
+                Demo:
+                an `in-line 0r in line ; abc` code;
+                `line`
+                or a ```block
+                code
+                ```! Yep.
+                Uh-huh. Check!
+            </p> -->
+            <hr />
+            <p class="text" spellcheck="true" id="intro">
+                GASM Stands for "Graphic Assembly Language", or "Graphic ASM".
+                It is a constructed
+                <a href="https://en.wikipedia.org/wiki/Esoteric_programming_language">esolang</a>
+                invented by <u>Hongtian Yu</u> as his Year 10 IST project in 2020.
+                The language is intended to be (mostly) of a demonstrative nature,
+                and its goal to be different to those of most languages &ndash;
+                it could either be compiled, or executed in realtime,
+                in order to produce a graphic, or an image, from accurate calculations
+                done by modern general programmable computing devices.
+            </p>
+            <h2 id="intro-why">Why GASM?</h2>
+            <p class="text">
+                Even though most modern painting or graphic(s) processing software allows us to create 
+                pictures and other graphics, they are not accurate &ndash; most of the times you will
+                have to create shapes and lines by hand. 
+            </p>
+            <p class="text">
+                Consider the <i id="regular-n-gon-problem">regular n-gon problem</i> or the 
+                <i>sine wave problem</i>: how would you easily create these things with the 
+                free &amp; light-weight tools available today? 
+                <br />
+                GASM is a solution to these problems &ndash; you could now combine programming and graphics together
+                with this language! Whilst being a language specifically designed for this purpose, GASM actually has 
+                an extremely minimalistic core &semi; yet it provides an extensive instruction set and a variety of highsly 
+                customisable and extensible features and libraries.
+            </p>
+            <p>
+                All the pages in this website use the same engine, written in modern Javascript
+                by the creator of this language, Hongtian Yu. This implementation is therefore 
+                named "JS-GASM".
+            </p>
+
+            <h2 id="tags">Tags/Labels Used</h2>
+            <p class="text">
+                In the sections below you may encounter on or more of the following tags/labels&colon; 
+            </p>
+            <table>
+                <tbody>
+                <tr>
+                    <td>@unused</td> 
+                    <td>
+                        It may be in the GASM standard, but is currently reserved and unused.
+                        <br />
+                        It should not be included in any implementations.
+                    </td>
+                </tr>
+                <tr>
+                    <td>@experimental</td>
+                    <td>Experimental feature. May not be stable.</td>
+                </tr>
+                <tr>
+                    <td>@draft</td>
+                    <td>
+                        This means that this is a draft feature. It is probably not yet 
+                        implemented in most of the modern implementations &ndash; 
+                        not even in JS-GASM.
+                    </td>
+                </tr>
+                <tr>
+                    <td>@unimplemented or @unsupported</td>
+                    <td>
+                        This means that it is currently not supported by JS-GASM.
+                        See <a href="#draft">below</a> for more information.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h2 id="data-and-types">Data &amp; Types</h2>
+            <p class="text">
+                All data in GASM are stored as numbers. <br />
+                The precision is not specified by the standard,
+                but 32-bit or 64-bit integer and floating-point types
+                that support complex numbers are recommended. 
+                However, this could be ignored as GASM 
+                is a <b>platform and architecture independent</b> language.
+            </p>
+            <h2 id="registers">Registers</h2>
+            <p class='text'>
+                GASM provides a series of default registers to store
+                temporary data produced from the instructions. <br />
+                They could only be set by internally by GASM, and are
+                therefore read-only.
+            </p>
+            <ul class="text">
+                <li>`$ret` - the return value from the last function call</li>
+                <li>
+                    `$[operation_name]` - values calculated by operations. 
+                    e.g. for `add 1, 1`, the result will be stored in `$add`.
+                </li>
+                <li>
+                    `$cmp` - used to store the compare value. 
+                    In JS-GASM, it's a four-bit integer.
+                </li>
+                <li>
+                    `$argc` - @unused
+                </li>
+                <li>
+                    `$var`, `$func` - @draft @unimplemented
+                </li>
+                <li>
+                    `$w`, `$h` - the width and height of the canvas
+                </li>
+                <li>
+                    `$pi, $deg2rad, $rad2deg...` - mathematical constants.
+                </li>
+            </ul>
+
+            <h2 id="syntax">GASM Syntax</h2>
+            <p class="text">
+                GASM has a very simple syntax, as it is an 
+                <a href="https://en.wikipedia.org/wiki/X86_assembly_language">
+                    Intel x86 Assembly</a>-like 
+                language&colon;
+                ``` [span class="gasm-instruction"]&lt;&lt;instruction&gt;&gt;[/span] &lsqb;argument1, argument2...&rsqb; ```
+                For literal numerical values, the following form should be accepted:
+            </p>
+            <ul class="text">
+                <li>Decimal form: e.g. `1024`, `01200` (<b>not</b> octal, = `1200`), and `0.250`</li>
+                <li>Hex form: `0xFFabcd18`</li>
+                <li>Binary form: `0b001110010110`</li>
+                <li>Scientific notation: `2.567e-23`</li>
+            </ul>
+
+            <div id="instructions-main">
+                <h2 id="instructions">Instructions</h2>
+                [[path]]
+                <p>
+                    `path { [i]begin[/i] | { [i]end[/i] | [i]close[/i] } | [span class="gasm-instruction"]to[/span]
+                    [i]x, y[/i]&nbsp; }`
+                    <br />
+                    Marks paths. <br />
+                    Paths are closed shapes consisted of `line`s &ndash;
+                    even though they may not be drawn.
+                    Arguments (mutually exclusive):
+                </p>
+                <ul>
+                    <li>
+                        `begin`: begins a path.
+                        Does not draw anything,
+                        and is to be used by `fill`.
+                    </li>
+                    <li>
+                        `close` (or `end`): marks the end of
+                        the current path and automatically
+                        closes it with&nbsp;a&nbsp;`line`.
+                    </li>
+                    <li>
+                        `[span class="gasm-instruction"]to[/span]`: 
+                        creates an invisible path in order to `fill`
+                        without borders <i>(only a draft feature)</i> <b>(Unimplemented in JS-GASM)</b> @unused
+                    </li>
+                </ul>
+                [[movp]]
+                <p>
+                    `movp [i]x[/i],&nbsp;[i]y[/i]&nbsp;`
+                    <br />
+                    Marks the starting position of a `line` or `path`.
+                </p>
+                [[line]]
+                <p>
+                    `line [i]x[/i],&nbsp;[i]y[/i]&nbsp;`
+                    <br />
+                    Marks the ending position of a line and draws it
+                    from the point set by `movp`. 
+                    <br />
+                    The next line will start from the ending position of this line,
+                    if no `movp` or `path close` is called.
+                </p>
+                [[lwid]]
+                <p>
+                    `lwid [i]number[/i]&nbsp;` <br />
+                    Sets the width of the line to be drawn by `line`
+                    in <b>pixels</b>.
+                </p>
+                [[fill]]
+                <p>
+                    `fill&nbsp;` <br /> @experimental <br />
+                    Fills the area marked/enclosed by `path`. If the path is not closed,
+                    it should <b>automatically</b> close it. <b>(Experimental)</b>
+                </p>
+                [[rgba]]
+                <p>
+                    `rgba { line | fill }, { [i]#HEX_COLOR[/i] | [i]r, g, b[/i] }` <br />
+                    Sets the color used by instructions such as `line` and `fill`. <br />
+                    Its first parameter is the instruction.
+                    For the second parameter, a <b>color value</b> is to be specified;
+                    it could be any of the following:
+                </p>
+                <ul>
+                    <li>A hexadecimal value representing the rgba value, e.g. #aabbccdd, #ABC</li>
+                    <li>
+                        Four integers between 0 and 255 representing red, green and blue values, <br />
+                        and an alpha between 0 and 1, e.g. `rgba 128, 64, 57, 0.5`
+                    </li>
+                </ul>
+                [[set]]
+                <p>
+                    `set $.variable.name [value]` <br />
+                    All variables must have a namespace,
+                    i.e. the default namespace `$.` in order to distinguish
+                    them from the <a href="#registers">registers</a>.
+                </p>
+                [[del]]
+                <p>
+                    `del $.variable.name` <br />
+                    @experimental <br /> Removes a variable. 
+                    It could not be referenced from now on.
+                </p>
+                [[print]]
+                <p>
+                    `print { text | number | $variable, ...}` <br />
+                    Prints a message onto the standard output, 
+                    e.g. the browser's Javascript developer console,
+                    or the GASM Console.
+                </p>
+                [[func]]
+                <p>
+                    `func [b]function_name[/b] [i]arguments...[/i]` <br />
+                    Defines a function.
+                </p>
+                <ul>
+                    <li>
+                        <b>function_name</b> - The name of the function
+                        <ul style="list-style-type: circle;">
+                            <li>
+                                The name may contain namespace(s): 
+                                e.g. `func .util.main.draw_image` @draft @experimental
+                            </li>
+                        </ul>
+                    </li>
+                    <li><i>arguments...</i> - The arguments @draft @unsupported</li>
+                </ul>
+                [[call]]
+                <p>
+                    `call func_name [ [i]arg1, arg2...[/i] ]` <br />
+                    Calls a function. The function could either be a custom function,
+                    or a predefined standard function &ndash; refer to the JS-GASM
+                    implementations below: <br />
+                    <img src="../res/std-func-in-js-gasm.png" />
+                </p>
+                [[ret]]
+                <p>
+                    `ret [value]` <br /> @experimental <br />
+                    Returns a value from the current function. <br />
+                    Sets the register `$ret` to the value and exits.
+                </p>
+                [[dump]]
+                <p>
+                    @experimental <br />
+                    Will dump the values of <b>every</b> register in the standard output
+                    for debugging purposes.
+                </p>
+                <h3 id="operations">Common Operations</h3>
+                <p>
+                    Common operations include the following 
+                    (shown through the JS-GASM implementation again):
+                    <img src="../res/std-op-in-js-gasm.png" />
+                    Adding an `s` (for "self") after the operation will cause GASM to store the result 
+                    in the variable given in the first parameter, e.g. `adds $.a, 3 ; add 3 to $.a`.
+                </p>
+                <h3 id="conditionals">Common Conditionals</h3>
+                <p>
+                    Conditional instructions, called "conditionals" in GASM, will only be executed
+                    if the condition set for the result of the last `cmp` instruction is true. <br />
+                    It includes the following: `e, ne, g, ge, l, le`.  <br />
+                    `e` means equal, and `g` and `l` mean greater or lesser. <br />
+                    They are to be combined with `call` or `set`, like `sle` or `cg`,
+                    e.g. 
+```add 1, 1
+cmp $add, 2
+cge printn 1, 2, 3 ; only calls printn(1, 2, 3) if 1 + 1 >= 2
+```
+                </p>
+            </div>
+            <h3 id="draft">Notes On My Draft (and Unsupported) Features</h3>
+            <p class="text">
+                Some of them I didn't have time to implement, 
+                while others may just be a discarded feature.
+            </p>
+        </main>
+    </div>
+    <footer id="footer"></footer>
+    <script src="../template.js" defer></script>
+    <script src="../gasm-lib/gasm-lexer.js" defer></script>
+    <script src="../gasm-lib/gasm-engine.js" defer></script>
+    <script src="../gasm-lib/gasm-highlight.js" defer></script>
+    <script type="text/javascript">
+        // this relies on the newest ECMAScript features -- 
+        // they are so good and clean and time-saving!
+
+        /** 
+         * do the highlighting in a separate thread
+         * as it will indeed take quite a while..
+         */
+        async function highlightElementsAsync() {
+            // translate my shortcodes first!
+            templateGenerateShortcodeHTML('.text, #instructions-main > *');
+
+            let contents = document.getElementById('instructions-list');
+            let main = document.getElementById('instructions-main');
+            for (const instruction of main
+                .innerHTML
+                .matchAll(/\[\[([^\[\]]+)\]\]/g)) {
+                const namePrefix = "instruction-"; // id/name prefix
+                let name = instruction[1].trim();
+                let id = namePrefix + name.toLowerCase().replace(/\W/g, '-');
+                let entry = document.createElement('a');
+                entry.href = '#' + id;
+                entry.innerHTML = '<b>' + name + '</b>';
+                contents.appendChild(entry);
+                main.innerHTML = main.innerHTML.replace(
+                    instruction[0],
+                    `<h3 id="${id}">${name}</h2>`
+                );
+            }
+
+            let mainElement = document.getElementsByTagName("main")[0];
+            mainElement.innerHTML = mainElement.innerHTML.replace(
+                /@([A-z]+)/g, '<span class="tag $1">$1</span>'
+            );
+
+            let dummyCanvas = document.createElement('canvas');
+            let dummyEngine = new GasmEngine(dummyCanvas, '');
+
+            gasmHTMLSyntaxHighlightAuto(
+                ".inline.code, .block.code",
+                dummyEngine.consumers,
+                document.getElementsByTagName('main')[0]
+            );
+        }
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            highlightElementsAsync() // returns a Promise
+                .catch(reason => console.warn('GASM highlighting failed due to: \n"'
+                    + reason
+                    + '"'
+                ))
+                .then(value => console.debug('GASM highlighting has finished.'));
+        });
+
+        /** @type {HTMLElement} */
+        let lastHashedElement = null;
+        /** a factory, or generator, for my handler... */
+        let hashHandlerFactory = function (isLoad) {
+            const activeClassName = 'active';
+            return function (ev) {
+                let isPageLoad = isLoad;
+                if (location.hash != '#') { // not empty hash
+                    if (lastHashedElement)
+                        lastHashedElement.classList.remove(activeClassName);
+                    let highlightedHeading = document.getElementById(location.hash.substr(1));
+                    if (highlightedHeading) {
+                        highlightedHeading.classList.add(activeClassName);
+                        lastHashedElement = highlightedHeading;
+                        if(isPageLoad) { // first load, scroll
+                            highlightedHeading.scrollIntoView();
+                        }
+                    }
+                }
+            };
+        };
+
+        window.addEventListener("hashchange", hashHandlerFactory(false));
+        window.addEventListener("load", hashHandlerFactory(true));
+
+        (function () { // @depecated attempt to generate the contents. Not needed anymore.
+            let nav = document.getElementById('nav-side');
+            let contents = [
+                ['#intro', 'Introduction']
+            ]
+        })();
+    </script>
+</body>
+
+</html>

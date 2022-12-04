@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Playground</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="code.css" />
+    <link rel="stylesheet" href="playground.css" />
+</head>
+
+<body class="light-theme">
+    <ul id="navbar"></ul>
+    <div class="toolbar">
+        <!-- <span style="flex-grow: 0.4; height: 100%; background-color: blue; color: white;">[debug_placeholder]</span> -->
+        <span>
+            <select name="preset" id="preset">
+                <option value="na">No Preset</option>
+                <option value="dl">Diagonal Line</option>
+<template id="dl">
+movp 0, 0
+line -0, -0
+</template>
+                <option value="sw">Sine Wave</option>
+<template id="sw">
+set $.x 0
+set $.y 0
+
+set $.scale 32
+
+div $h, 2 ; canvas height / 2
+set $.cy $div ; centered y position
+
+movp 0, $.cy ; start position
+
+func plot ; function for plotting each pixels
+
+	div $.x $.scale ; making it bigger (scaling down)
+	call sin $div
+	set $.y $ret
+
+	muls $.y $.scale ; scale it
+	adds $.y $.cy ; centering it
+
+	line $.x $.y ; draw!
+
+	adds $.x, 1 ; x++
+
+	; print $.x $.y (debug)
+
+	cmp $.x $w
+	cle plot ; if x &lt;= width, call self
+
+func end
+
+call plot ; plot!
+
+dump ; dump registers...
+</template>
+                <option value="rd">Random Colourful Lines (Non-Continuous)</option>
+<template id="rd">
+set $.x 0
+set $.y 0
+
+func proc_rand
+    muls $.x, $w
+    muls $.y, $h
+    muls $.sx, $w
+    muls $.sy, $h
+    ret 0
+func end
+
+set $.count 0
+
+movp 0, 0
+
+func plot
+
+    ; random rgb
+    call rand
+    set $.r $ret
+    muls $.r 255
+    call rand
+    set $.g $ret
+    muls $.g 255
+    call rand
+    set $.b $ret
+    muls $.b 255
+    
+    rgba line $.r $.g $.b 1 ; no alpha
+
+    call rand 
+    ; $ret = random number between 0 - 1
+    set $.x $ret
+
+    call rand
+    set $.y $ret
+    
+    call rand
+    set $.sx $ret
+    
+    call rand
+    set $.sy $ret
+
+    call proc_rand
+
+    path begin
+    movp $.sx, $.sy
+    line $.x, $.y
+    path close
+
+    print Random line No. $.count
+
+    adds $.count 1
+    cmp $.count, 256
+    cle plot ; loop 256 times
+
+func end
+
+call plot ; plot!  
+
+</template>
+            </select>
+        </span>
+        <button id="run" class="green-button">Run</button>
+        <button id="save-output">Save Output</button>
+        <a href="docs/reference.html" style="
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            text-decoration: none;
+            "><button class="help-button" title="GASM Reference">?</button></a>
+    </div>
+    <main id="main" class="light-theme">
+        <div class="code">
+            <!--  @discarded(design0)
+            <pre id="code-in" class="code-editor" contenteditable="true">
+                <span class="line-numbers"></span>
+            </pre> -->
+            <div class="code-editor-scroll-view">
+                <span class="line-numbers" id="line-numbers">
+                    <span>1</span>
+                </span>
+                <div class="code-editor-container">
+                    <div class="code-underlay" id="code-editor"></div>
+                    <div class="code-editor" id="code-input" contenteditable="true" spellcheck="false"></div>
+                </div>
+            </div>
+        </div>
+        <div class="output">
+            <canvas id="canvas-out" class="canvas-out"></canvas>
+        </div>
+        <br />
+    </main>
+    <script src="gasm-lib/gasm-engine.js" defer></script>
+    <script src="gasm-lib/gasm-lexer.js" defer></script>
+    <script src="gasm-lib/gasm-highlight.js" defer></script>
+    <script src="playground.js" defer></script>
+    <footer id="footer"></footer>
+    <script src="template.js" defer></script>
+</body>
+
+</html>

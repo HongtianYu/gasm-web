@@ -1,0 +1,154 @@
+/* index.html styles */
+
+/* meant to be used on the body element */
+.body-flex {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	
+	overflow: hidden; /* forcing no-scrolling */
+}
+
+/* the main div (excluding the headers and footers) */
+.main {
+	background-color: rgb(180, 200, 255);
+	background-image: url('res/main-bg.png'); /* Original background created with Blender */
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 50% 25%; /* adjusting position */
+
+	display: flex;
+
+	/* centering child elements */
+	align-items: center;
+	justify-content: center;
+
+	width: 100%;
+	flex: 1; /* fill available space */
+
+	overflow: hidden; /* force no scroll */
+}
+
+.main, .main * {
+	transition: all 570ms;
+}
+
+/* the intro text style */
+.intro {
+	width: 40%;
+	max-height: 100%;
+
+	position: absolute;
+	/* slightly positioned 10% to the left from the right edge */
+	right: 10%;
+	box-sizing: border-box;
+
+	text-align: center;
+	color: whitesmoke;
+	font-size: xx-large;
+	word-wrap: break-word;
+}
+
+.intro h2 {
+	margin: 0.5em;
+}
+
+.intro h4 {
+	font-size: 75%;
+	margin: 0.1em;
+}
+
+.intro p {
+	font-size: 45%;
+}
+
+/* make sure <hr> works (may not be used) */
+.intro hr {
+	width: 100%;
+	padding: 0px;
+}
+
+.button-text {
+	font-size: 0.5cm;
+	padding: 0.4cm;
+	transition: all 220ms;
+}
+
+.button-text::after {
+	content: "";
+	width: 0px;
+	opacity: 0;
+	transition: all 0.5s;
+}
+
+.button-text:hover::after {
+	content: "...";
+	opacity: 1;
+	width: auto; 
+}
+
+.bib-link {
+	padding-left: 32px;
+	text-align: left;
+	color: whitesmoke;
+	transition: color 250ms;
+}
+
+.bib-link:hover {
+	color: white;
+}
+
+@media only screen and (max-width: 876px) {
+	/* tablet support (for fun) */
+
+	.main {
+		background-position: 25% 25%;
+	}
+
+	.intro {
+		/* center it and clear the 'right' offset*/
+		right: 0;
+		top: 15%; /* moving up */
+		width: 100%; 
+		padding: 10%;
+	}
+
+	.nav-link {
+		padding: 16px 3vw;
+		transition: background 250ms;
+		font-size: 1em;
+	}
+
+	@media only screen and (max-width: 612px) {
+		/* mobile support (smaller) */
+		#navbar {
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		.nav-item {
+			float: none;
+			display: inline-block;
+		}
+
+		.nav-icon {
+			display: none;
+		}
+
+		.nav-link {
+			padding: 8px 8px;
+			transition: background 250ms;
+			font-size: 0.5em;
+		}
+
+		.button-text {
+			border-radius: 2em;
+		}
+	
+	}
+
+}
+

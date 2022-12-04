@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+	<!-- Responsive Webpage Declaration -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="main.css" />
+	<link rel="stylesheet" href="index.css" />
+</head>
+<body class="body-flex">
+	<!-- The navigation bar!  -->
+    <ul id="navbar">
+		<noscript id="js-message-home">
+			<li class="nav-item" style="float: none; display: block; text-align: center;">
+				<a href="https://www.javascript.com/" class="nav-link"><i>Your browser doesn't support the latest Javascript?!?</i></a>
+			</li>
+		</noscript>
+		<script> var es6Supported; // undefined right now </script>
+		<script> es6Supported = `${!false}`; // template literals support? </script>
+		<script>
+			if(es6Supported) {} // it's defined; template literals supported...
+			else {
+				var msge = document.getElementById('js-message-home');
+				// displays the noscript message anyway, for it doesn't evcen support ES6
+				msge.parentElement.innerHTML += msge.textContent || msge.innerHTML;
+			}
+		</script>
+    </ul>
+	<!-- the main container div. -->
+	<div class="main">
+		<div class="intro">
+			<h2>GASM</h2>
+			<hr />
+			<h4>The Graphic Assembly Language.</h4>
+			<p>Bringing the brand-new concept of programmable graphics.</p>
+			<a href="about.html"><button class="green-button-old orange-button button-text">Learn More</button></a>
+		</div>
+	</div>
+	<footer id="footer">
+		<!-- The bibliography link should only exist in the home page! -->
+		<a class="bib-link" href="bibliography.html"><b>Bibliography</b></a>
+
+		<!-- An example of generated contents: -->
+		<!-- <div class="footer-left">
+			<i>Hongtian Yu 2020</i>
+			<hr />
+			<a href="bibliography.html"><b>Bibliography</b></a>
+		</div>
+		<div class="footer-right">
+			<a href="#">About the site itself</a>
+		</div> -->
+
+		<!-- If my name is quickly clicked ten times there will be a cringy easter egg.  -->
+	</footer>
+	<!-- 
+		the script I wrote which generates the 
+		menu and the footer for every page.
+		The "defer" attribute should make it wait
+		until the whole document is parsed.
+		It's put at the end just in case the
+		attribute is not supported.
+	-->
+	<script src="template.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="gasm-engine.js"></script>
+        <script src="gasm-lexer.js"></script>
+    </head>
+    <body>
+        <textarea id="t1" cols="100" rows="10">
+            lorem ipsum sit amet w 2736b   2eh  i
+                jn
+            bcw # 'ffghjk'
+
+            uythg 4t 4g 5h3 2 f4b5 ;    usless comments stuff 123 45 ; 23  
+            l! lll!3 ; ccccccccccc
+            ~
+            !EOF
+        </textarea>
+        <hr />
+        <button id="t">Test!</button>
+        <hr />
+        <style> pre { width: 100%; overflow-x: auto; } </style>
+        <pre id="p1">
+            (null)
+        </pre>
+        <pre id="p2">
+            (null)
+        </pre>
+        <hr />
+        <textarea id="t2" cols="100" rows="8">
+            path begin
+            movp 150, 100
+            LINE 600 300
+            movp 25, 75
+            line 500, 200
+            path close
+            path begin
+            rgba 123 255 100
+            lwid 5
+            movp 0 300
+            line 0,0
+            path begin
+            line 500, 300
+            ; EOF
+        </textarea>
+        <br />
+        <br />
+        <canvas id="co" height="300" width="600" style="border: 1px solid gray; border-radius: 6px;">
+        </canvas>
+        <script>
+            document.getElementById('t').onclick = function(e) {
+                gasmLexerTest(
+                    document.getElementById('t1'), 
+                    [document.getElementById('p1'), document.getElementById('p2')],
+                    true
+                );
+
+                /**
+                 * @type {HTMLCanvasElement}
+                 */
+                var canvas = document.getElementById('co');
+                var context = canvas.getContext("2d");
+
+                // Store the current transformation matrix
+                context.save();
+
+                // Use the identity matrix while clearing the canvas
+                context.setTransform(1, 0, 0, 1, 0, 0);
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.beginPath();
+
+                // Restore the transform
+                context.restore();
+
+                var engine = new GasmEngine(
+                    canvas,
+                    {
+                        text: document.getElementById('t2').value
+                    }
+                );
+
+                var isEOF = engine.interpretInstruction() == true;
+                while(!isEOF) {
+                    isEOF = engine.interpretInstruction();
+                }
+
+                console.log("Reached EOF Instruction!");
+            }
+        </script>
+    </body>
+</html>

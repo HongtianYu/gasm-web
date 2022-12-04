@@ -1,0 +1,294 @@
+main {
+    background-color: white;
+    width: 100%;
+    box-sizing: border-box;
+    /* height = screen (viewport) height */
+    height: 64vh;
+    /* using flexbox to be responsive */
+    /* display: flex; never mind. Don't need it. */
+    padding: 32px;
+}
+
+.toolbar {
+    height: 8vh;
+    width: 88%;
+    box-sizing: border-box;
+    margin: 32px auto 0px auto;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.code {
+    width: 48%;
+    height: 100%;
+
+    box-sizing: border-box;
+
+    margin-left: 1%;
+    margin-bottom: 3%;
+
+    float: left;
+    border: 1px solid gray;
+    border-radius: 4px;
+
+    overflow: hidden;
+}
+
+.line-numbers {
+    position: relative;
+    width: 32px;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding: 8px 0px;
+    display: block;
+}
+
+.line-numbers > span {
+    font-size: 1em;
+    box-sizing: border-box;
+    padding: 0px 4px;
+    display: block;
+}
+
+.code-editor-scroll-view {
+    position: relative;
+    height: 100%;
+    
+    overflow-x: auto;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.code-editor-container {
+    position: relative;
+    height: 100%;
+
+    /* fill the rest of 
+       the unused space */
+    flex-grow: 1;
+}
+
+.code-editor {
+    position: relative;
+    cursor: text;
+    caret-color: blue;
+
+    color: transparent;
+}
+
+.code-editor > * {
+    border: none;
+    margin: 0;
+    padding: 0px;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+.code-underlay {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    height: auto; /* grow later*/
+    resize: none;
+    border: none;
+}
+
+.code-editor, .code-underlay {
+    padding: 8px;
+    margin: 0;
+
+    font-size: 1em;
+
+    text-align: left;
+    box-sizing: border-box; 
+
+    min-height: 100%;
+    min-width: 100%;
+
+    white-space: pre;
+
+	background-color: transparent;
+}
+
+/* gettin' rid of the webkit's
+ * default ':focus' styles 
+ */
+.code-editor:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.output {
+    width: 48%;
+    height: 100%;
+    box-sizing: border-box;
+    margin-right: 1%;
+    display: block;
+    float: right;
+}
+
+.canvas-out {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.green-button, #save-output {
+    height: 100%;
+    width: auto;
+    box-sizing: border-box;
+    font-size: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    align-self: center;
+    margin: 0px 32px;
+    border-radius: 0px;
+    cursor: pointer;
+}
+
+#save-output {
+    text-decoration: none;
+    transition: all 220ms;
+    margin-left: 2vw;
+}
+
+#save-output:hover {
+    text-decoration: underline;
+}
+
+.toolbar select[name=preset] {
+    font-size: 1em;
+    min-width: 100px;
+    width: 25vw;
+    border: none;
+    border-radius: 2px;
+    background-color: lightcyan;
+}
+
+.help-button {
+    font-size: 1.25em; /* x 1.25 */
+    border-radius: 0.75em;
+    box-sizing: border-box;
+    height: 1.5em;
+    /* width: 1.35em; */
+    width: 1.5em; /* width = height */
+    /* padding: 0.75em 0px; */
+    text-align: center;
+    /* show the little hand */
+    cursor: pointer; 
+
+    margin-left: 5vw;
+}
+
+.info {
+
+}
+
+.code-line, .code-editor > div {
+    position: relative;
+    font-size: 1em;
+}
+
+.light-theme {
+
+}
+
+.light-theme .toolbar {
+    background-color: lightskyblue;
+}
+
+.light-theme .line-numbers {
+    background-color: lightgray;/*
+    border: 1px solid lightslategray;*/
+    border-right-color: transparent;
+    border: none;
+}
+
+.light-theme .code-editor {
+    /*border: 1px solid lightslategray;*/
+    border-left-color: transparent;
+    border: none;
+}
+
+.light-theme .canvas-out {
+    border: 1px solid lightslategray;
+}
+
+.light-theme .green-button {
+    background-color: #36e014ce;
+    font-weight: bolder;
+}
+
+.light-theme .green-button:hover {
+    background-color: #23dd93;
+}
+
+.light-theme .green-button:active {
+    background-color: lawngreen;
+}
+
+.light-theme #save-output {
+    color: white;
+    background: transparent;
+    border: 2px solid lightcyan;
+    border-top: none;
+    border-bottom: none;
+}
+
+.light-theme #save-output:hover {
+    background-color: lightcyan;
+    color: cornflowerblue;
+}
+
+.light-theme .help-button {
+    background-color: #d1f5ed;
+
+    /*
+    background: radial-gradient(
+        ellipse at center,
+        #2dfcaaff 0%,
+        #2dfcaaff 70%,
+        #2dfcaa00 70.314%
+    );*/
+
+    color: #0b9c7d;
+    opacity: 0.75;
+    transition: all 0.2s;
+    border: none;
+}
+
+.light-theme .help-button:hover {
+    opacity: 1;
+    background-color: gray;
+    color: white;
+}
+
+/* @deprecated 
+ * the flashy cursor animation 
+ */
+@keyframes cursor-animation {
+	0%, 20%, 100% { opacity: 0; }
+	40%, 60% { opacity: 1; }
+}
+
+.light-theme .code-cursor {
+    display: inline-block;
+	height: 1em;
+	width: 2px;
+    background: black;
+	animation: cursor-animation 1s infinite;
+}
+
+.dark-theme {
+    /* Unimplemented... */
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About</title>
+    <!-- the arrows are not displaying properly without the charset declaration. -->
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="about.css" />
+</head>
+<body>
+    <nav>
+        <ul id="navbar">
+        </ul>
+    </nav>
+    <main>
+        <h1>About GASM</h1>
+        <video id="main-video" src="res/intro.mp4" controls>
+            <!-- 
+                If "autoplay" attribute is present then 
+                it will play when the pages loads... 
+                But the criteria says that the video should
+                NOT be played when the page loads.
+            -->
+            Your browser doesn't have any support for the HTML5 &lt;video&gt; tag for some reason.
+            <br />
+            Try a different browser!
+        </video>
+        <h6>Are your eyes too tired? Listen to the audio version of this page below!</h6>
+        <audio id="narration" src="res/intro-text-narration.wav" controls>
+            Your browser doesn't even support the &lt;audio&gt; tag&quest;&excl;&excl;
+            It&apos;s sooooo outdated. Get a Chromium or something!
+        </audio>
+        <!-- 
+            Not needed as they come with the browsers nowadays...
+            <div title="Audio Controls"><strong> - (audio controls and stuff here!) - </strong></div> 
+        -->
+        <p>
+            <abbr>GASM</abbr> stands for the Graphic Assembly Language - its goal is to 
+            assist you in making complex patterns or other contents with modern graphics
+            and computing power.
+        </p>
+        <h3>Why do you need GASM?</h3>
+        <p style="line-height: 1.75em;">
+            Well, imagine drawing a perfect regular hexagon with
+            <a style="text-decoration: none;" href="https://en.wikipedia.org/wiki/Microsoft_Paint">MS Paint</a>,
+            or a sine wave with the pencil tool, or even randomly generating graphics 
+            which couldn't even be achieved with most of the modern popular tools.
+            But now you could access an extremely powerful tool: GASM. It's easy, and
+            it's <b>programmable</b>&excl; You could write your own algorithm to generate graphics
+            as complex as you wish while maintaining its accuracy with its mathematical
+            nature and its linear vector representation in its core. You could even extend
+            it with your own features &ndash; simply fork the source code of the playground 
+            or the console page (both accessible through the menu&nbsp;bar 
+            at the top of this page)&excl;
+        </p>
+        <div class="more-info">
+            <!-- In UTF-8 0x27B2 is ➲⮊ -->
+            <!-- Change of plan. I'm just gonna use ► (U+25BA). -->
+            <span>Want more info & technical details? &nbsp;</span>
+            <a href="docs/main.html">
+            <button class="green-button">Read the DOCS &#x25BA;<!-- 
+                (the old arrow) 
+                <span class="arrow">&#x27b2;</span>
+            --></button>
+            </a>
+        </div>
+    </main>
+    <footer id="footer"></footer>
+    <script src="template.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+/* The stylesheet for embedded codes */
+
+/* The Open Sans (Regular, 400) Web Font on Google Fonts.
+ * It's Sans-Serif, as for some weird and random reason
+ * I cannot use Serif fonts as Courier for code content.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+code, .code {
+    font-family: 'Open Sans', sans-serif, monospace;
+}
+
+/* code highlighting */
+
+.gasm-instruction {
+    color: blue;
+}
+
+.gasm-decimal {
+    color: rgb(200, 0, 0);
+}
+
+.gasm-integer {
+    color: green;
+}
+
+.gasm-argument {
+    color: darkslategray;
+}
+
+.gasm-register {
+    color: darkslategray;
+}
+
+.gasm-variable {
+    color: darkslateblue;
+}
+
+.gasm-comment {
+    color: rgb(16, 128, 64);
+    font-style: italic;
+}
+
+/* code content styles */
+
+.inline.code, .block.code {
+    /* light lightskyblue */
+    background-color: rgb(200, 235, 255);
+    box-sizing: border-box;
+}
+
+.inline.code {
+    border-radius: 4px;
+    padding: 0.2em;
+    display: inline;
+    font-size: 1em;
+}
+
+.block.code {
+    border-radius: 8px;
+    padding: 0.6em;
+    margin: 0.4em;
+    display: block;
+    font-size: 0.9em;
+    white-space: pre;
+    overflow: auto;
+}
+

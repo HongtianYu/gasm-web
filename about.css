@@ -1,0 +1,52 @@
+main {
+    margin: 32px;
+    display: block;
+    text-align: center;
+}
+
+#main-video {
+    /* the <video>'s style */
+    width: 64%; 
+    /* automatically setting height */
+    height: auto;
+    background-color: lightblue;
+    border-radius: 16px; /* rounded corners */
+    outline: none;
+}
+
+#narration {
+    /* the <audio>'s style */
+    width: 64%;
+    border-radius: 4px;
+
+    /* the above styles are for the browser's default
+     * fallback player / controls when my JS stuff isn't available.
+     * hopefully my JS controls will work on most browsers.
+     */
+}
+
+.more-info {
+    font-size: larger;
+    margin: 16px 2px;
+    border: 1px solid gray;
+    border-radius: 0.5em;
+    padding: 32px 4px;
+    background-color: lightcyan;
+}
+
+.more-info .green-button {
+    /* the "Read the Docs" button */
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 1em; /* normal size */
+    text-transform: uppercase; /* force uppercase */
+    vertical-align: middle;
+}
+
+.more-info .green-button .arrow {
+    /* make the font size one and a half times bigger... */
+    font-size: 2.5em; 
+    /* vertically centering... */
+    vertical-align: middle;
+}
+

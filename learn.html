@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Learn</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" />
+    <link rel="stylesheet" href="code.css" />
+    <link rel="stylesheet" href="learn.css" />
+    <style>
+        .help {
+            cursor: help;
+            text-decoration: underline solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul id="navbar"></ul>
+    </nav>
+    <main>
+        <h1 style="margin-bottom: 1em;"><span>Learn GASM</span></h1>
+        <p style="text-align: center; padding: 0px 6em;">
+            Welcome to GASM's learning page!
+            <br />
+            Here you will find tutorials to get you started immediately.
+            <br />
+            This tutorial is most useful to programmers with experience
+            of basic programming concepts and familiarity with assembly code &amp; syntax &ndash;
+            especially the Intel x86 assembly.
+            <br />
+            <br />
+            Well,
+            open up the <a href="console.html">Console</a>
+            or the <a href="playground.html">Playground</a>
+            in another tab and let's get started!
+        </p>
+        <h2><span>Hello Line!</span></h2>
+        <p>
+            Whilst with most languages, the first program you've ever learned
+            to write in them must've been the classic &quot;Hello World&quot;
+            program &ndash; but with GASM, being a graphical language itself,
+            we will be writing something rather different for our first project:
+            a&nbsp;&quot;Hello&nbsp;Line&quot; program.
+        </p>
+        <p>
+            So, let's see what it looks like:
+        </p>
+        <p>
+            ```
+            ; My first Hello Line program!
+
+            movp 0, 0
+            line -1, -1
+            ```
+        </p>
+        <p>
+            Well, how about that? Only 3 lines of code! <br />
+            And if everything worked out alright, you should see the following output&colon;&nbsp;
+            <img class="block" src="res/demo-hello-line.png" />
+            In order to draw a line with GASM, we need to do three things&colon;
+        </p>
+        <ol>
+            <li>Set the position of the point where the line starts.</li>
+            <li>Set the position of the point where the line ends.</li>
+            <li>Draw the line.</li>
+        </ol>
+        <p>
+            Simple, right&quest; Well, that's exactly what the code above does. <br />
+            In each line of the code, two parts could be found:
+        </p>
+        <ul>
+            <li>An instruction, e.g. `movp` and `line`</li>
+            <li>
+                the arguments for this instruction, separated by commas &ndash;
+                <ul>
+                    <li>For `movp`, it is `0` and `0`;</li>
+                    <li>And for `line`, it is `-1` and `-1`.</li>
+                </ul>
+            </li>
+            <li>Instructions and its arguments are separated by whitespace(s)</li>
+            <li>And lines that are consisted of these two parts are called statements.</li>
+        </ul>
+        <p>
+            So, let's take a look at what each line does&colon;
+        </p>
+        <ul>
+            <li>
+                `movp` stands for "move" and "point".
+                It sets, or moves, the point where the line starts.
+                It takes a coordinate as its arguments,
+                meaning that it takes two arguments: the <i>x</i> and <i>y</i> coordinate,
+                in pixels, of the point. <br />
+                Which, this case, is `0` and `0`, which is the upper left corner of the
+                <b title="This could be an image, a canvas, or even the screen itself..." class="help">
+                    target&nbsp;graphic</b>, the canvas.
+            </li>
+            <li>
+                The `line` instruction does two things for you:
+                <ul>
+                    <li>Sets the target position;</li>
+                    <li>Draw the line.</li>
+                </ul>
+                Which also takes a pair of coordinates as its arguments,
+                being the position of the target/destination point of the line to be drawn.
+            </li>
+        </ul>
+        <p>
+            Notice how we've given it negative coordinates?
+            They certainly don't mean drawing outside of the canvas, of course &ndash;
+            they are called <i>inverse&nbsp;offsets</i>, meaning that their real position
+            is calculated by <strong>the size of canvas</strong> minus their absolute value; <br />
+            Therefore, in the example given above, us passing the coordinate `&nbsp;-1,&nbsp;-1&nbsp;`
+            to `line` is literally shorthand for:
+            ``` line [i] &lt;&lt;the width of the canvas&gt;&gt; &lt;/i&gt; - 1, &lt;i&gt; &lt;&lt;the height of the canvas&gt;&gt; [/i] - 1 ```
+            <small><em>Do mind that the above code is a piece of pseudocode &ndash; calculations are not done like so in
+                    GASM!</em></small>
+            <br />
+        </p>
+        <p>
+            Now, you may ask: if so, then could I have `-0,&nbsp;-0`?
+        </p>
+        <p>
+            Well, I can tell you the answer now: definitely! In GASM, the '&minus;' sign does <i>not</i> mean
+            that the number is negative; it simply means that the numeric value is an offset. Therefore,
+            unlike zero and negative zero, `0` and `-0` in GASM represents completely different values,
+            and you could, indeed, have statements like `line -0, -0`. <br />
+            In fact, why don't you try it out now?
+        </p>
+        <h2><span>Comments</span></h2>
+        <p>
+            You must've noticed something different in the first line&colon;
+            it starts with a semicolon `&nbsp;&semi;&nbsp;&nbsp;`, and
+            it doesn't look like a piece of code&semi; in&nbsp;fact, it's a sentence &ndash;
+            a human-readable, English sentence.
+        </p>
+        <p>What does it do? What could possibly be its function?</p>
+        <p>A simple and minimalistic answer would be: <i>nothing</i>.</p>
+        <p>
+            Well, nothing to do with the program itself, anyway.<br />
+            If you remove that line, the program's output will be exactly the same. <br />
+            Lines that contain or start with a semicolon are called comments &ndash; for example,
+            ``` ; This is a comment. ```
+            The content inside the comments is completely ignored by the
+            <b title="The program that executes or compiles the GASM source code." class="help">
+                GASM&nbsp;processor</b>,&nbsp;which, in this case, is
+            <a href="docs/reference.html#js-gasm">JS-GASM</a>'s HTML5 & Javascript interpreter,
+            which is used in the <a href="playground.html">Playground</a> 
+            and the <a href="console.html">Console</a>.
+        </p>
+        <p>
+            Therefore, the comment is not intended to be read by the machines, but by us, the humans.
+            It is invented to make the source code more understandable, and store extra information about
+            parts of the code.<br />
+            So even though this is a piece of legal code, it really does not help the readers much:
+            ``` line -5, -5 ; VXNlbGVzcyBDb21tZW50! AsdfG h JKlZ xcVb Nm ~!@#$%&*()_+  ```
+        </p>
+        <h2><span>Variables</span></h2>
+        <p>
+            Variables are one of the most important features of the GASM programming language!
+            <br />
+            It's declared and assigned like so:
+            ``` set $.[i]&lt;&lt;optional.variable.namespace&gt;&gt;[/i][span class="gasm-variable"].variable_name[/span] &lt;&lt;initial_value&gt;&gt; ```
+            and are referenced like this:
+            ``` line $.var1, $.var2 ; using their values ```
+            All variables are global, and will exist until the program ends, or explicitly
+            deleted with the `del $.variable_name` instruction.
+        </p>
+        <br />
+        <hr />
+        <p style="text-align: center;">
+            <b>
+                Now that you have learned the most basic features of GASM,
+                go and check out the <a href="docs/reference.html">GASM Reference</a>
+                for more detailed information and more advanced features such as
+                <i>functions</i> and <i>debugging</i>.
+            </b>
+        </p>
+        <hr />
+    </main>
+    <footer id="footer"></footer>
+    <script src="template.js"></script>
+    <script src="gasm-lib/gasm-lexer.js"></script>
+    <script src="gasm-lib/gasm-engine.js"></script>
+    <script src="gasm-lib/gasm-highlight.js"></script>
+    <script>
+        templateGenerateShortcodeHTML('main');
+        let dummyEngine = new GasmEngine(document.createElement('canvas'), { text: '' });
+        console.debug(
+            gasmHTMLSyntaxHighlightAuto('main .code', dummyEngine.consumers)
+            + " GASM code elements highlighted."
+        );
+    </script>
+</body>
+
+</html>

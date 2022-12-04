@@ -1,0 +1,50 @@
+/* styles for the 'Learn' page */
+
+body main * {
+    font-family: 'Roboto', 'Microsoft YaHei UI', Arial, Helvetica, sans-serif;
+}
+
+main {
+    margin: 16px 86px;
+    padding: 32px;
+}
+
+main p {
+    font-size: larger;
+    line-height: 1.5em;
+}
+
+main li {
+    line-height: 2em;
+}
+
+main a, main a:visited {
+    text-decoration: none;
+    color: cornflowerblue;
+}
+
+main a:hover {
+    color: #f56200;
+}
+
+h1, h2, h3 {
+    margin: 0.5em;
+}
+
+h1 > *, h2 > *, h3 > * {
+    border-bottom: 4px solid cornflowerblue;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+main img {
+    margin: 0px 2em;
+    height: auto;
+    max-width: 30%;
+    border: 2px solid lightgray;
+    border-radius: 0.25em;
+    overflow: hidden;
+}
+

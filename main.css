@@ -1,0 +1,174 @@
+/* The main stylesheet for most pages. (Overridable) */
+/* Gotta have CSS3 (and above) support to get these styles working */
+
+body {
+	margin: 0px;
+	/* these native fonts are much faster than the online fonts */
+	font-family: 'Microsoft YaHei', 'Microsoft Sans Serif', Arial, Helvetica, sans-serif;
+}
+
+#navbar {
+	/* necessary for float */
+	overflow: hidden;
+    list-style-type: none;
+	background-color: #7ca7eb;
+	padding: 0px;
+	margin: 0;
+	width: 100%;
+	position: relative;
+	/* couting paddings in! */
+	-webkit-box-sizing: border-box; 
+	/* backward -webkit-* compat (Chromium doesn't need it but some does...) */
+	box-sizing: border-box; 
+	/* ...but I'm too lazy to add full compat
+	 * like these (-o-*, -webkit-*...) in everything
+	 * so I'm not doing this in other styles.
+	 * Plus, the teacher's using Chrome anyway.
+	 */
+	display: block;
+}
+
+#nav, #nav * {
+	transition: all 220ms;
+}
+
+#footer {
+	display: block;
+	overflow: hidden;
+	background-color: rgb(0, 31, 255); /* blue */;
+	width: 100%; /* full parent width (or, in this case, screen width (100vw) */
+	color: cyan;
+	margin: 0px;
+	padding: 16px 0px;
+	font-size: small;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* the navigation bar's styles */
+
+/* the icon's dimensions 
+ * should be equal (a square) 
+ * and has a transparent background.
+ * I'm probably gonna need Paint.NET...
+ */
+.gasm-icon-img {
+	box-sizing: border-box;
+	height: 100%;
+	width: auto;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* the container for the icon */
+.nav-icon {
+	position: absolute;
+	height: 100%;
+	vertical-align: middle;
+	float: left;
+	transition: background-color 450ms; /* smooth! */
+}
+
+.nav-icon > a {
+	box-sizing: border-box;
+	display: inline-block;
+	height: 100%;
+}
+
+/* each menu item container */
+.nav-item {
+	float: right;
+}
+
+/* the links in the menu's style */
+.nav-link {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 32px;
+	/* Removing stubborn underline */
+	text-decoration: none;
+	transition: background 450ms;
+}
+
+/* the menu item corresponding 
+ * with the current page (if exists)
+ */
+.nav-link-current {
+	background-color: #8eb1eb;
+	box-sizing: border-box;
+}
+
+.nav-link:hover, .nav-icon:hover {
+	background-color: #337ef5;
+}
+
+/* the footer's styles */
+
+.footer-left {
+	float: left;
+	text-align: left;
+	padding-left: 32px;
+}
+
+.footer-right {
+	float: right;
+	text-align: right;
+	padding-right: 32px;
+}
+
+#footer a {
+	display: inline;
+	transition: color 250ms;
+	color: skyblue;
+}
+
+#footer a:hover {
+	color: white;
+}
+
+/* "The Green Button" styles */
+
+.green-button {
+	border: none;
+	color: white;
+	background-color: rgb(0, 120, 0);
+	transition: all 0.35s;
+}
+
+.green-button:hover {
+	background-color: rgb(0, 200, 0);
+	cursor: pointer;
+}
+
+.green-button:focus {
+	background-color: green;
+	outline: yellowgreen;
+}
+
+.green-button:active {
+	background-color: yellowgreen;
+}
+
+.orange-button {
+	border: none;
+	/*outline: 2px solid white;*/
+	background-color: #f56200; /* rgb(221, 255, 249); */
+	color: white; /* black; */
+	font-weight: lighter;
+}
+
+.orange-button:hover {
+	background-color: #f59433;
+	cursor: pointer;
+}
+
+img.block  {
+	margin: 1em;
+	display: block;
+}
+
+::selection {
+	background-color: #f5943388; /* also have alpha in hex (newer CSS feature) */
+}
+
